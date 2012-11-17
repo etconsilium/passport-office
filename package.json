@@ -1,0 +1,35 @@
+{
+    "name": "su.2128506.auth"
+  , "author": {
+      "name": "VS"
+    , "email": "v.koltsov@gmail.com"
+  }
+  , "version": "1.1.100"
+  , "scripts": { "start": "node server.js" }
+  , "private": true
+  , "dependencies": {
+    "express": "2.5.9"
+    , "ejs": "*"
+    , "mongoskin": "*"
+    , "passport": "*"
+    , "passport-facebook": "*"
+    , "passport-twitter": "*"
+    , "passport-vkontakte": "*"
+    , "node-uuid": "*"
+    , "phpjs": "*"
+    , "string": "*"
+    , "underscore": "*"
+    , "util": "*"
+    , "object.extend": "*"
+  }
+  , "engines": {
+	  "node": ">=0.4"
+  }
+
+ , "devDependencies": {
+      "mocha": "1.7.0"
+    , "should": "1.2.1"
+    , "supertest": "0.4.0"
+  }
+
+}

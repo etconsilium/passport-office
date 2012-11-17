@@ -1,0 +1,7 @@
+/**
+ * Element
+ */
+
+module.exports = function(){
+	
+}

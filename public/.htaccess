@@ -1,0 +1,24 @@
+<Files .ht*>
+    order deny,allow
+    deny from all
+</Files>
+
+RewriteEngine On
+Options +FollowSymlinks -Indexes -Includes -MultiViews
+RewriteBase /
+
+RewriteCond %{REQUEST_METHOD}  ^(HEAD|TRACE|DELETE|TRACK|OPTIONS) [NC]
+RewriteRule - [L,F]
+
+RewriteCond %{script_filename}	!-f
+#RewriteCond %{server_protocol}	^http/ [nc,or]
+RewriteCond %{https}		off	[or,nc]
+RewriteCond %{server_port}	^80$
+RewriteRule .* https://%{http_host}/$0 [l,qsa,r]
+
+RewriteCond %{script_filename}	!-f
+RewriteCond %{https}		on	[or,nc]
+RewriteCond %{server_port}	^443$
+#RewriteCond %{server_protocol}	^https/ [nc]
+RewriteRule .* https://127.0.0.1:13853/$0 [p,l,qsa]
+
