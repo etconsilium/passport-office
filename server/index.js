@@ -2,28 +2,26 @@ if ('undefined' == typeof APPROOT) { global.APPROOT = __dirname+'/..'; }
 require('./globals.js');
 
 global.passport = require('passport');
+global.iii=0;
 
 exports.run = function(port,host,done){
 	var app    = require('./app.js');
-	var config = require('../passport-config/');
 
-	// роуты здесь
+	var passport_modules = require('./passport-modules.js');
+	var db     = require(APPROOT+'/db/index.js');
+
 	app.get('/', function(req,res){res.render('index')});
 
 	app.use(passport.initialize());
 	app.use(passport.session());
 
-	$_.each(config, function(e,i){
-
-		passport.use( new e.strategy.instance( e.strategy.options, e.strategy.verify ));
-
-        $_.each(e.routes, 
-          function(route, index){
-            // console.log(index, route);
-            // if (!!config[index]){
-              app.get(index, route);		
-          }
-        );
+	$_.each(passport_modules, function(e,i){
+    passport.use(e.strategy);
+    $_.each(e.routes, 
+      function(route, index){
+          app.get(index, route);		
+      }
+    );
 	})
 
 	//	404 etc

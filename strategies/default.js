@@ -1,17 +1,18 @@
 module.exports={
-	name:'default'
+	name:undefined
 
 	,strategy:{
-		file:'passport-strategy'
-		,options:{	//	первый параметр мидвари: passport.use( new Strategy( @parameter
-			callbackURL:'/callback'	//	@see ./ndex.js
+		filename:undefined
+		,instance: (console.log('define Strategy! file '+__filename))	//	require(filename).Strategy
+		,options:{	//	первый параметр мидвари
+			callbackURL:'/name/callback'	//	@see ./index.js
 			,clientID:null
 			,clientSecret:null
 			,consumerKey:null
 			,consumerSecret:null
-			,etc:'@see also man Passport'
+			,etc:'@see man Passport'
 		}
-		,verify: function(/*4 параметра?*/){console.log(arguments);}
+		,verify: function(/*4 параметра*/){console.log(arguments); }
 		//	колбек стратегии, второй параметр
 	}
 	,authenticate:{
@@ -19,10 +20,8 @@ module.exports={
 			//	: passport.authenticate( @parameter )
 			successRedirect:'/'
 			,failureRedirect:'/login'
-			,scope:[]	//	разрешения доступа
+			,scope:[]	//	разрешения доступа, см. man Passport
 		}
-		,callback: function(/*4 параметра?*/){console.log(argumets);}	//	колбек стратегии, второй параметр
-		//	второй параметр passport.authenticate - колбек - задаётся прямо в роутах
 	}
 	,routes:false	//	if !object using ../routes/{name}.js
 	//	

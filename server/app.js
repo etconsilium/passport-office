@@ -31,9 +31,15 @@ app.configure( function () {
   app.use(express.logger('dev'));
   app.use(express.static(APPROOT + '/public'));   //  если не требуется обработка, парсинг, сессии и роутинг, то надо здесь
 
+  var MongoStore = require('connect-mongo')(express);
+
   app.use(express.bodyParser());
   app.use(express.cookieParser());
-  app.use(express.session({ secret: (Date.now()).toString()}));
+  app.use(express.session({secret: (Date.now()).toString()}));
+  app.use(express.session({
+    secret: (Date.now()).toString()
+   ,store: require(APPROOT+'/db/options.js').extend({db:'SESSION'})
+  }));
 
   app.use(app.router);
   app.use(express.errorHandler());
